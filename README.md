@@ -1,2 +1,1 @@
-# typescript-modalsubmit-eval-command
-Made with Discord.js v14.
+![](https://lency.is-a.fail/5znhg7Ar6.gif)
