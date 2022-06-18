@@ -8,7 +8,7 @@ import { inspect } from 'util';
 import {
   ChatInputCommandInteraction,
   ModalSubmitInteraction,
-} from '@discord';
+} from 'discord.js';
 
 import {
   EmbedBuilder as Embed,
