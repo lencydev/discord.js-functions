@@ -28,7 +28,7 @@ interface EvalMenuOptions {
   ephemeral?: boolean;
   pageSize?: number;
   result: string;
-  embeds: (value: string, firstInde: number, lastIndex: number, page: number, pages: number) => Embed[];
+  embeds: (value: string, firstIndex: number, lastIndex: number, page: number, pages: number) => Embed[];
 };
 
 export async function evalFunction (interaction: ModalSubmitInteraction, options: EvalMenuOptions): Promise<void> {
