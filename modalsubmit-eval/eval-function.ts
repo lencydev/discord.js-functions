@@ -62,7 +62,7 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
 
   let pages: number = Math.ceil(result.length / pageSize);
 
-  let generateButtons = (status?: boolean): Button[] => {
+  let buttons = (status?: boolean): Button[] => {
 
     let checkPage = (button: ButtonNames): boolean => {
 
