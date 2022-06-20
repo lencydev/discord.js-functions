@@ -84,11 +84,18 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
     }, []);
   };
 
-  let components = (status?: boolean): ActionRow<MessageActionRowComponent>[] => [
+  let components = (status?: boolean): ActionRow<MessageActionRowComponent>[] => {
 
-    new ActionRow<MessageActionRowComponent>().addComponents(...generateButtons(status)),
-  ];
+    let components: ActionRow<MessageActionRowComponent>[] = [];
 
+    if (buttons().length > 0) components = [
+
+      new ActionRow<MessageActionRowComponent>().addComponents(...buttons(status)),
+    ];
+
+    return components;
+  };
+  
   let page = (): Embed[] => {
 
     let oldEmbed: Embed = embeds(value, firstIndex, lastIndex, page, pages)[0]; 
