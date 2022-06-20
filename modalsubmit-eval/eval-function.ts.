@@ -26,8 +26,9 @@ interface EvalMenuOptions {
 
   users: User[];
   ephemeral?: boolean;
+  pageSize?: number;
   result: string;
-  embed: Embed;
+  embeds: (value: string, firstInde: number, lastIndex: number, page: number, pages: number) => Embed[];
 };
 
 export async function evalFunction (interaction: ModalSubmitInteraction, options: EvalMenuOptions): Promise<void> {
@@ -35,8 +36,9 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
   const {
     users,
     ephemeral = false,
+    pageSize = 1000,
     result,
-    embed,
+    embeds,
   } = options;
 
   let defaultStyles = {
@@ -56,9 +58,9 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
   let p: number = 1;
 
   let firstIndex: number = 0;
-  let lastIndex: number = 1000;
+  let lastIndex: number = pageSize;
 
-  let pages: number = Math.ceil(result.length / 1000);
+  let pages: number = Math.ceil(result.length / pageSize);
 
   let generateButtons = (status?: boolean): Button[] => {
 
@@ -89,11 +91,7 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
 
   let page = (): Embed[] => {
 
-    let oldEmbed: Embed = embed.setFields(
-      { name: `Type`, value: `${typeof result}`, inline: true },
-      { name: `Length`, value: `${result.length}`, inline: true },
-      { name: `Result (${p}/${pages})`, value: `\`\`\`ts\n${result.slice(firstIndex, lastIndex)}\`\`\``, inline: false },
-    );
+    let oldEmbed: Embed = embeds(value, firstIndex, lastIndex, page, pages)[0]; 
     let newEmbed: Embed = new Embed(oldEmbed.data);
 
     if (oldEmbed?.data.footer?.text) return [ newEmbed.setFooter({ text: oldEmbed.data.footer.text, iconURL: oldEmbed.data.footer.icon_url }) ];
@@ -150,8 +148,8 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
 
           p = pageValue;
 
-          firstIndex = p * 1000 -1000;
-          lastIndex = p * 1000;
+          firstIndex = p * pageSize -pageSize;
+          lastIndex = p * pageSize;
 
           await interaction.editReply({ embeds: page(), components: components() });
 
