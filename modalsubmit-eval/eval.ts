@@ -94,13 +94,23 @@ export default class extends Command {
         await evalFunction(modal, {
           users: [ modal.user ],
           ephemeral,
+          pageSize: 1000,
           result: clean(evaled),
-          embed: new Embed({
-            color: Color.Default,
-            author: {
-              name: `Eval`,
-            },
-          }),
+          embeds: (value: string, firstIndex: number, lastIndex: number, page: number, pages: number) => {
+            return [
+              new Embed({
+                color: Color.Default,
+                author: {
+                  name: `Eval`,
+                },
+                fields: [
+                  { name: `Type`, value: `${typeof value}`, inline: true },
+                  { name: `Length`, value: `${value.length}`, inline: true },
+                  { name: `Result (${page}/${pages})`, value: `\`\`\`ts\n${value.slice(firstIndex, lastIndex)}\`\`\``, inline: false },
+                ],
+              }),
+            ];
+          },
         });
   
       } catch (error) {
