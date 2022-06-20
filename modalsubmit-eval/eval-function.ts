@@ -122,8 +122,8 @@ export async function evalFunction (interaction: ModalSubmitInteraction, options
 
       let id: ButtonNames = button.customId as ButtonNames;
 
-      if (id === 'previous') p--, firstIndex = firstIndex -1000, lastIndex = lastIndex -1000;
-      if (id === 'next') p++, firstIndex = firstIndex +1000, lastIndex = lastIndex +1000;
+      if (id === 'previous') p--, firstIndex = firstIndex -pageSize, lastIndex = lastIndex -pageSize;
+      if (id === 'next') p++, firstIndex = firstIndex +pageSize, lastIndex = lastIndex +pageSize;
       if (id === 'delete') return await interaction.deleteReply();
 
       if (id === 'search') {
