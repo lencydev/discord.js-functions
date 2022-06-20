@@ -49,6 +49,7 @@ export default class extends Command {
             style: 2,
             custom_id: `code`,
             label: `Code`,
+            required: true,
           }),
         ),
         new ActionRow<TextInput>().addComponents(
