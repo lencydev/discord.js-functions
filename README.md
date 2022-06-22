@@ -1,2 +1,2 @@
-# [modalsubmit-eval](https://github.com/lencydev/commands/tree/main/modalsubmit-eval)
+# [modalsubmit-eval](https://github.com/lencydev/disocrd.js-v14-functions/tree/main/modalsubmit-eval-command)
 ![](https://lency.is-a.fail/5znhg7Ar6.gif)
